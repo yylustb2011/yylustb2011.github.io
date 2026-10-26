@@ -16,7 +16,7 @@ theme: fluid # landscape
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://yylustb2011.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -104,4 +104,8 @@ ignore:
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: git@github-work:yylustb2011/yylustb2011.github.io.git
+  branch: gh-pages
+  name: yylustb2011
+  email: yylustb2011@gmail.com
