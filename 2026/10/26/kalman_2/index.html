@@ -27,7 +27,7 @@
 <meta property="og:description" content="本文介绍正定矩阵、二次函数梯度与 Hessian 矩阵的基本性质，并通过 LaTeX 展示多行公式和矩阵表达式。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-10-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-10-26T04:00:31.840Z">
+<meta property="article:modified_time" content="2026-10-26T04:03:39.088Z">
 <meta property="article:author" content="Yongliang Yang">
 <meta property="article:tag" content="凸优化">
 <meta property="article:tag" content="控制理论">
@@ -327,7 +327,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          2.2k 字
         
       </span>
     
@@ -338,7 +338,7 @@
         
         
         
-          17 分钟
+          19 分钟
         
       </span>
     
@@ -386,8 +386,8 @@
 展示多行公式和矩阵表达式。</p>
 <span id="more"></span>
 <h1 id="高斯分布的变换">1. 高斯分布的变换</h1>
-<p>若已知 <span
-class="math inline">$\mu\in\R^n$</span>、<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Σ</mi><mo>≻</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Sigma\succ0</annotation></semantics></math>，先分解
+<p>若已知
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>∈</mo><msup><mi mathvariant="double-struck">ℝ</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\mu\in\mathbb{R}^n</annotation></semantics></math>、<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Σ</mi><mo>≻</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Sigma\succ0</annotation></semantics></math>，先分解
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Σ</mi><mo>=</mo><mi>L</mi><msup><mi>L</mi><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">\Sigma=LL^T</annotation></semantics></math>，再生成
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>∼</mo><mi mathvariant="script">𝒩</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><msub><mi>I</mi><mi>n</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Z\sim\mathcal N(0,I_n)</annotation></semantics></math>，最后构造
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>X</mi><mo>=</mo><mi>μ</mi><mo>+</mo><mi>L</mi><mi>Z</mi><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
@@ -406,7 +406,7 @@ X=\mu+LZ.
     X_1\\
     X_2
 \end{bmatrix}
-\sim\mathcal N\left(
+\sim\mathcal{N}\left(
 \begin{bmatrix}
     \mu_1\\
     \mu_2
@@ -472,12 +472,16 @@ X_2=\mu_2+K(X_1-\mu_1)+Y.
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mn>2</mn></msub><annotation encoding="application/x-tex">X_2</annotation></semantics></math>
 的条件分布仍然是高斯。</p>
 <ul>
-<li>$ <em>{22}-</em>{21}<em>{11}^{-1}</em>{12} $
+<li><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="normal">Σ</mi><mn>22</mn></msub><mo>−</mo><msub><mi mathvariant="normal">Σ</mi><mn>21</mn></msub><msubsup><mi mathvariant="normal">Σ</mi><mn>11</mn><mrow><mi>−</mi><mn>1</mn></mrow></msubsup><msub><mi mathvariant="normal">Σ</mi><mn>12</mn></msub></mrow><annotation encoding="application/x-tex">\Sigma_{22}-\Sigma_{21}\Sigma_{11}^{-1}\Sigma_{12}</annotation></semantics></math>
 是联合协方差矩阵关于左上块
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="normal">Σ</mi><mn>11</mn></msub><annotation encoding="application/x-tex">\Sigma_{11}</annotation></semantics></math>
 的 Schur 补。这说明在联合高斯模型中，条件协方差可由 Schur
 补精确计算。</li>
-<li>条件均值还可以写成 [ <em>{} =</em>{} +<em>{} </em>{}. ]
+<li>条件均值还可以写成
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><munder><msub><mi>μ</mi><mrow><mn>2</mn><mo stretchy="false" form="prefix">|</mo><mn>1</mn></mrow></msub><mo accent="true">⏟</mo></munder><mtext mathvariant="normal">观测后的估计</mtext></munder><mo>=</mo><munder><munder><msub><mi>μ</mi><mn>2</mn></msub><mo accent="true">⏟</mo></munder><mtext mathvariant="normal">原先均值</mtext></munder><mo>+</mo><munder><munder><mi>K</mi><mo accent="true">⏟</mo></munder><mtext mathvariant="normal">增益</mtext></munder><munder><munder><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>−</mo><msub><mi>μ</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><mo accent="true">⏟</mo></munder><mtext mathvariant="normal">观测偏差</mtext></munder><mi>.</mi></mrow><annotation encoding="application/x-tex">\underbrace{\mu_{2|1}}_{\text{观测后的估计}}
+=\underbrace{\mu_2}_{\text{原先均值}}
++\underbrace{K}_{\text{增益}}
+\underbrace{(x_1-\mu_1)}_{\text{观测偏差}}.</annotation></semantics></math>
 这与卡尔曼滤波中的“先验估计
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>+</mi><annotation encoding="application/x-tex">+</annotation></semantics></math>
 增益
@@ -556,8 +560,8 @@ X_2=\mu_2+K(X_1-\mu_1)+Y.
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2026/10/26/kalman_1/" title="Kalman 滤波 - 1. 多维高斯分布">
-                        <span class="hidden-mobile">Kalman 滤波 - 1. 多维高斯分布</span>
+                      <a href="/2026/10/26/cvx_test/" title="凸优化数学公式测试">
+                        <span class="hidden-mobile">凸优化数学公式测试</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
