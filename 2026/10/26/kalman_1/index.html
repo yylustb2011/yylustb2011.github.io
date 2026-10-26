@@ -21,13 +21,13 @@
   
     <meta name="description" content="本文介绍正定矩阵、二次函数梯度与 Hessian 矩阵的基本性质，并通过 LaTeX 展示多行公式和矩阵表达式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kalman 滤波 - 1. 预备知识">
+<meta property="og:title" content="Kalman 滤波 - 1. 多维高斯分布">
 <meta property="og:url" content="https://yylustb2011.github.io/2026/10/26/kalman_1/index.html">
 <meta property="og:site_name" content="个人学习博客">
 <meta property="og:description" content="本文介绍正定矩阵、二次函数梯度与 Hessian 矩阵的基本性质，并通过 LaTeX 展示多行公式和矩阵表达式。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-10-25T16:00:00.000Z">
-<meta property="article:modified_time" content="2026-10-26T03:24:52.132Z">
+<meta property="article:modified_time" content="2026-10-26T03:52:04.997Z">
 <meta property="article:author" content="Yongliang Yang">
 <meta property="article:tag" content="凸优化">
 <meta property="article:tag" content="控制理论">
@@ -35,7 +35,7 @@
   
   
   
-  <title>Kalman 滤波 - 1. 预备知识 - 个人学习博客</title>
+  <title>Kalman 滤波 - 1. 多维高斯分布 - 个人学习博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -304,7 +304,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Kalman 滤波 - 1. 预备知识"></span>
+            <span id="subtitle" data-typed-text="Kalman 滤波 - 1. 多维高斯分布"></span>
           
         </div>
 
@@ -327,7 +327,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          739 字
+          2.8k 字
         
       </span>
     
@@ -338,7 +338,7 @@
         
         
         
-          7 分钟
+          24 分钟
         
       </span>
     
@@ -377,7 +377,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">Kalman 滤波 - 1. 预备知识</h1>
+            <h1 id="seo-header">Kalman 滤波 - 1. 多维高斯分布</h1>
             
             
               <div class="markdown-body">
@@ -400,23 +400,92 @@ p_X(x)
 决定密度曲线的中心；方差
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>σ</mi><mn>2</mn></msup><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mrow><mo stretchy="true" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow></mrow><annotation encoding="application/x-tex">\sigma^2=\mathbb{E}\left[(X-\mu)^2\right]</annotation></semantics></math>
 衡量围绕中心的波动程度。</p>
-<h2 id="多行公式">1.2 多行公式</h2>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mi>⊤</mi></msup><mi>P</mi><mi>x</mi><mo>+</mo><msup><mi>q</mi><mi>⊤</mi></msup><mi>x</mi><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi>∇</mi><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>P</mi><mi>x</mi><mo>+</mo><mi>q</mi><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msup><mi>∇</mi><mn>2</mn></msup><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi>P</mi><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
-f(x) &amp;= \frac{1}{2}x^\top P x + q^\top x,\\
-\nabla f(x) &amp;= Px+q,\\
-\nabla^2 f(x) &amp;= P.
+<h2 id="标准高斯变量的平移与缩放">1.2 标准高斯变量的平移与缩放</h2>
+<p>令
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Z</mi><mo>∼</mo><mi mathvariant="script">𝒩</mi><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Z\sim\mathcal N(0,1)</annotation></semantics></math>，定义
+$ X = + Z$.</p>
+<p>计算均值：
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mi>μ</mi><mo>+</mo><mi>σ</mi><mi>Z</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>μ</mi><mo>+</mo><mi>σ</mi><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mi>Z</mi><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi>μ</mi><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\mathbb{E}[X]
+=\mathbb{E}[\mu+\sigma Z]=\mu+\sigma\mathbb{E}[Z]=\mu.
+\end{aligned}</annotation></semantics></math> 计算方差：
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mrow><mi mathvariant="normal">Var</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">]</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mi>σ</mi><mi>Z</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup><mo stretchy="false" form="postfix">]</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msup><mi>σ</mi><mn>2</mn></msup><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><msup><mi>Z</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">]</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msup><mi>σ</mi><mn>2</mn></msup><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\operatorname{Var}(X)&amp;=\mathbb{E}[(X-\mu)^2]\\
+&amp;=\mathbb{E}[(\sigma Z)^2]\\
+&amp;=\sigma^2\mathbb{E}[Z^2]\\
+&amp;=\sigma^2.
+\end{aligned}</annotation></semantics></math> 因此
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>∼</mo><mi mathvariant="script">𝒩</mi><mo stretchy="false" form="prefix">(</mo><mi>μ</mi><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">X\sim\mathcal N(\mu,\sigma^2)</annotation></semantics></math>。简单说，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math>
+控制缩放，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>μ</mi><annotation encoding="application/x-tex">\mu</annotation></semantics></math>
+控制平移。高维高斯只是把标量缩放变为矩阵线性变换。</p>
+<h1 id="多维高斯分布">2. 多维高斯分布</h1>
+<h2 id="从方差到协方差矩阵">2.1 从方差到协方差矩阵</h2>
+<p><strong>定义：</strong> 若
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>X</mi><mi>j</mi></msub></mrow><annotation encoding="application/x-tex">X_i,X_j</annotation></semantics></math>
+都有有限二阶矩，记
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mi>i</mi></msub><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><msub><mi>X</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\mu_i=\mathbb{E}[X_i]</annotation></semantics></math>、<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>μ</mi><mi>j</mi></msub><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><msub><mi>X</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\mu_j=\mathbb{E}[X_j]</annotation></semantics></math>，则
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mrow><mi mathvariant="normal">Cov</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>X</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>−</mo><msub><mi>μ</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mi>j</mi></msub><mo>−</mo><msub><mi>μ</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">]</mo><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\operatorname{Cov}(X_i,X_j)=\mathbb{E}[(X_i-\mu_i)(X_j-\mu_j)].
 \end{aligned}</annotation></semantics></math></p>
-<h2 id="矩阵公式">3. 矩阵公式</h2>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>p</mi><mn>11</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>p</mi><mn>12</mn></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>p</mi><mn>21</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>p</mi><mn>22</mn></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">P =
-\begin{bmatrix}
-p_{11} &amp; p_{12}\\
-p_{21} &amp; p_{22}
-\end{bmatrix}.</annotation></semantics></math></p>
-<h2 id="定理">4. 定理</h2>
-<p><strong>定理：</strong> 若
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><msup><mi>P</mi><mi>⊤</mi></msup><mo>≻</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">P=P^\top\succ 0</annotation></semantics></math>，则二次函数</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>x</mi><mi>⊤</mi></msup><mi>P</mi><mi>x</mi><mo>+</mo><msup><mi>q</mi><mi>⊤</mi></msup><mi>x</mi></mrow><annotation encoding="application/x-tex">f(x)=\frac{1}{2}x^\top Px+q^\top x</annotation></semantics></math></p>
-<p>存在唯一的全局最优解。</p>
+<h2 id="协方差矩阵的逐元素推导">2.2 协方差矩阵的逐元素推导</h2>
+对于
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>X</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><msub><mi>X</mi><mn>2</mn></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>T</mi></msup></mrow><annotation encoding="application/x-tex">X=(X_1,X_2)^T</annotation></semantics></math>，先构造去均值向量
+[ X-=
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>X</mi><mn>1</mn></msub><mo>−</mo><msub><mi>μ</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>X</mi><mn>2</mn></msub><mo>−</mo><msub><mi>μ</mi><mn>2</mn></msub></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\begin{bmatrix}X_1-\mu_1\\X_2-\mu_2\end{bmatrix}</annotation></semantics></math>
+<p>. ] 它与自身转置的外积为
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>T</mi></msup><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mn>1</mn></msub><mo>−</mo><msub><mi>μ</mi><mn>1</mn></msub><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mtd><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mn>1</mn></msub><mo>−</mo><msub><mi>μ</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mn>2</mn></msub><mo>−</mo><msub><mi>μ</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mn>2</mn></msub><mo>−</mo><msub><mi>μ</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mn>1</mn></msub><mo>−</mo><msub><mi>μ</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="center" style="text-align: center"><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mn>2</mn></msub><mo>−</mo><msub><mi>μ</mi><mn>2</mn></msub><msup><mo stretchy="false" form="postfix">)</mo><mn>2</mn></msup></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+(X-\mu)(X-\mu)^T
+=\begin{bmatrix}
+(X_1-\mu_1)^2&amp;(X_1-\mu_1)(X_2-\mu_2)\\
+(X_2-\mu_2)(X_1-\mu_1)&amp;(X_2-\mu_2)^2
+\end{bmatrix}.
+\end{aligned}</annotation></semantics></math> 对每个元素取期望，得到
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi mathvariant="normal">Σ</mi><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>T</mi></msup><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mrow><mo stretchy="true" form="prefix">[</mo><mtable><mtr><mtd columnalign="center" style="text-align: center"><msubsup><mi>σ</mi><mn>1</mn><mn>2</mn></msubsup></mtd><mtd columnalign="center" style="text-align: center"><msub><mi>σ</mi><mn>12</mn></msub></mtd></mtr><mtr><mtd columnalign="center" style="text-align: center"><msub><mi>σ</mi><mn>12</mn></msub></mtd><mtd columnalign="center" style="text-align: center"><msubsup><mi>σ</mi><mn>2</mn><mn>2</mn></msubsup></mtd></mtr></mtable><mo stretchy="true" form="postfix">]</mo></mrow><mo>,</mo></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\Sigma=\mathbb{E}[(X-\mu)(X-\mu)^T]
+=\begin{bmatrix}
+\sigma_1^2&amp;\sigma_{12}\\
+\sigma_{12}&amp;\sigma_2^2
+\end{bmatrix},
+\end{aligned}</annotation></semantics></math> 其中
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>σ</mi><mn>12</mn></msub><mo>=</mo><mrow><mi mathvariant="normal">Cov</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><msub><mi>X</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\sigma_{12}=\operatorname{Cov}(X_1,X_2)</annotation></semantics></math>。</p>
+<p>推广到
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+维，设 <span
+class="math inline">$X\in\R^n$</span>，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mi>X</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">\mu=\mathbb{E}[X]</annotation></semantics></math>，定义
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><mi mathvariant="normal">Σ</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mrow><mi mathvariant="normal">Cov</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>T</mi></msup><mo stretchy="false" form="postfix">]</mo><mo>∈</mo><msup><mi mathvariant="double-struck">ℝ</mi><mrow><mi>n</mi><mo>×</mo><mi>n</mi></mrow></msup><mo>,</mo></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msub><mi mathvariant="normal">Σ</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mrow><mi mathvariant="normal">Cov</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>X</mi><mi>i</mi></msub><mo>,</mo><msub><mi>X</mi><mi>j</mi></msub><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\Sigma&amp;=\operatorname{Cov}(X)
+\\
+&amp;=\mathbb{E}[(X-\mu)(X-\mu)^T]\in\mathbb{R}^{n\times n},\\
+\Sigma_{ij}&amp;=\operatorname{Cov}(X_i,X_j).
+\end{aligned}</annotation></semantics></math>
+主对角线上是各个分量的方差，非对角线上是成对的协方差。这说明一维方差就是
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n=1</annotation></semantics></math>
+时的协方差矩阵。</p>
+<h2 id="协方差矩阵对称半正定">2.3 协方差矩阵对称半正定</h2>
+<p><strong>定理：</strong> 若 <span
+class="math inline">$X\in\R^n$</span> 有有限二阶矩，则
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Σ</mi><mo>=</mo><mrow><mi mathvariant="normal">Cov</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\Sigma=\operatorname{Cov}(X)</annotation></semantics></math>
+满足 -
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi mathvariant="normal">Σ</mi><mi>T</mi></msup><mo>=</mo><mi mathvariant="normal">Σ</mi></mrow><annotation encoding="application/x-tex">\Sigma^T=\Sigma</annotation></semantics></math>
+即
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Σ</mi><mo>≽</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Sigma\succeq0</annotation></semantics></math>
+- 对任意确定向量 <span
+class="math inline">$a\in\R^n$</span>，<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Var</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msup><mi>a</mi><mi>T</mi></msup><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>a</mi><mi>T</mi></msup><mi mathvariant="normal">Σ</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">\operatorname{Var}(a^TX)=a^T\Sigma a</annotation></semantics></math>.</p>
+<p>首先由转置与期望的线性性质，
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msup><mi mathvariant="normal">Σ</mi><mi>T</mi></msup></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>T</mi></msup><mo stretchy="false" form="postfix">]</mo><mo stretchy="true" form="postfix">)</mo></mrow><mi>T</mi></msup></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mrow><mo stretchy="true" form="prefix">[</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>T</mi></msup><mo stretchy="true" form="postfix">)</mo></mrow><mi>T</mi></msup><mo stretchy="true" form="postfix">]</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mo stretchy="false" form="prefix">[</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>T</mi></msup><mo stretchy="false" form="postfix">]</mo><mo>=</mo><mi mathvariant="normal">Σ</mi><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+\Sigma^T&amp;=\left(\mathbb{E}[(X-\mu)(X-\mu)^T]\right)^T\\
+&amp;=\mathbb{E}\left[\left((X-\mu)(X-\mu)^T\right)^T\right]\\
+&amp;=\mathbb{E}[(X-\mu)(X-\mu)^T]=\Sigma.
+\end{aligned}</annotation></semantics></math> 其次，任取 <span
+class="math inline">$a\in\R^n$</span>，得到
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"><msup><mi>a</mi><mi>T</mi></msup><mi mathvariant="normal">Σ</mi><mi>a</mi></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mrow><mo stretchy="true" form="prefix">[</mo><msup><mi>a</mi><mi>T</mi></msup><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>T</mi></msup><mi>a</mi><mo stretchy="true" form="postfix">]</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mi mathvariant="double-struck">𝔼</mi><mrow><mo stretchy="true" form="prefix">[</mo><mo minsize="120%" maxsize="120%" stretchy="true" form="prefix">(</mo><msup><mi>a</mi><mi>T</mi></msup><mo stretchy="false" form="prefix">(</mo><mi>X</mi><mo>−</mo><mi>μ</mi><mo stretchy="false" form="postfix">)</mo><msup><mo minsize="120%" maxsize="120%" stretchy="true" form="postfix">)</mo><mn>2</mn></msup><mo stretchy="true" form="postfix">]</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd><mtd columnalign="left" style="text-align: left; padding-left: 0"><mo>=</mo><mrow><mi mathvariant="normal">Var</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msup><mi>a</mi><mi>T</mi></msup><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mn>0</mn><mi>.</mi></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+a^T\Sigma a&amp;=\mathbb{E}\left[a^T(X-\mu)(X-\mu)^Ta\right]\\
+&amp;=\mathbb{E}\left[\big(a^T(X-\mu)\big)^2\right]\\
+&amp;=\operatorname{Var}(a^TX)\geq0.
+\end{aligned}</annotation></semantics></math> 因此
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="normal">Σ</mi><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math>
+对称半正定，且同时
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">Var</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><msup><mi>a</mi><mi>T</mi></msup><mi>X</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>a</mi><mi>T</mi></msup><mi mathvariant="normal">Σ</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">\operatorname{Var}(a^TX)=a^T\Sigma a</annotation></semantics></math>。</p>
 
                 
               </div>
@@ -434,7 +503,7 @@ p_{21} &amp; p_{22}
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Kalman 滤波 - 1. 预备知识</div>
+      <div>Kalman 滤波 - 1. 多维高斯分布</div>
       <div>https://yylustb2011.github.io/2026/10/26/kalman_1/</div>
     </div>
     <div class="license-meta">
@@ -479,15 +548,21 @@ p_{21} &amp; p_{22}
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2026/10/26/cvx_test/" title="凸优化数学公式测试">
+                      <a href="/2026/10/26/kalman_2/" title="Kalman 滤波 - 2. 高斯分布与矩阵理论">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">凸优化数学公式测试</span>
+                        <span class="hidden-mobile">Kalman 滤波 - 2. 高斯分布与矩阵理论</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2026/10/26/cvx_test/" title="凸优化数学公式测试">
+                        <span class="hidden-mobile">凸优化数学公式测试</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
